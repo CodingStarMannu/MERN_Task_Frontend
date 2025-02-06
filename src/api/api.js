@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:9000/api";
+// const API_BASE_URL = "http://localhost:9000/api";
+const API_BASE_URL = "https://mern-task-backend-khuo.onrender.com/api";
 
 axios.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
