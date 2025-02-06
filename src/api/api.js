@@ -28,12 +28,15 @@ export const uploadProfilePicture = async (formData) => {
   });
 };
 
-export const addBio = async (data) => {
-  return axios.patch(`${API_BASE_URL}/user/addBio`, data,{
-    headers: {
-      "Content-Type": "multipart/form-data",
+export const addBio = async (bio) => {
+  return axios.patch(`${API_BASE_URL}/user/addBio`, 
+    { bio: bio },
+    {
+      headers: {
+        "Content-Type": "application/json"
+      }
     }
-  });
+  );
 };
 
 export const uploadVideo = async (formData) => {
