@@ -1,25 +1,29 @@
 import React, { useState } from "react";
 import { addBio } from "../api/api";
-import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+
+
 
 
 const AddBio = () => {
   const [bio, setBio] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await addBio({ bio });
       setMessage(response.data.message);
+      navigate('/profile');
     } catch (error) {
       setMessage(error.response.data.error || "Failed to update bio");
     }
   };
 
   return (
+    <>
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-2xl mx-auto py-12 px-4">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">Add Bio</h2>
@@ -45,6 +49,7 @@ const AddBio = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

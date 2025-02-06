@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { uploadVideo } from "../api/api";
-import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
+
 
 
 
@@ -9,6 +10,8 @@ const UploadVideo = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
+
 
   const handleUpload = async (e) => {
     e.preventDefault();
@@ -20,6 +23,7 @@ const UploadVideo = () => {
     try {
       const response = await uploadVideo(formData);
       setMessage(response.data.message);
+      navigate('/home')
     } catch (error) {
       setMessage(error.response.data.error || "Upload failed");
     }
@@ -27,7 +31,6 @@ const UploadVideo = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-2xl mx-auto py-12 px-4">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">Upload Video</h2>

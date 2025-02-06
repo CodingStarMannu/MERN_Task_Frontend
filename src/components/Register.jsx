@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { createAccount } from "../api/api";
-
-
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +9,8 @@ const Register = () => {
     email: "",
     phone: "",
   });
+  const navigate = useNavigate();
+
   const [message, setMessage] = useState("");
 
   const handleInputChange = (e) => {
@@ -21,6 +22,7 @@ const Register = () => {
     try {
       await createAccount(formData);
       setMessage("User registered successfully!");
+      navigate("./login");
     } catch (error) {
       setMessage(error.response.data.message || "Registration failed.");
     }
@@ -30,7 +32,7 @@ const Register = () => {
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-md mx-auto py-12 px-4">
         <div className="bg-white rounded-xl shadow-lg p-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">Register</h2>
+          <h2 className="text-3xl font-bold text-gray-800 mb-6">Create Account</h2>
           <form onSubmit={handleSubmit} className="space-y-6">
             {[
               { name: "firstName", placeholder: "First Name", type: "text" },
@@ -57,12 +59,24 @@ const Register = () => {
             </button>
           </form>
           {message && (
-            <p className={`mt-4 text-center ${
-              message.includes("successfully") ? "text-green-600" : "text-red-600"
-            }`}>
+            <p
+              className={`mt-4 text-center ${
+                message.includes("successfully") ? "text-green-600" : "text-red-600"
+              }`}
+            >
               {message}
             </p>
           )}
+          {/* Add login link here */}
+          <p className="mt-4 text-center text-gray-600">
+            Already Registered?{" "}
+            <span
+              onClick={() => navigate("/login")}
+              className="text-blue-500 hover:underline cursor-pointer"
+            >
+              Login Here
+            </span>
+          </p>
         </div>
       </div>
     </div>

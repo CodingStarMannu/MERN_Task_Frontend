@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { login } from "../api/api";
-// import Navbar from "./Navbar";
+import { useNavigate } from "react-router-dom";
 
 
 const Login = () => {
   const [formData, setFormData] = useState({ firstName: "", password: "" });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -17,6 +18,7 @@ const Login = () => {
       const response = await login(formData);
       localStorage.setItem("token", response.data.token);
       setMessage("Login successful!");
+      navigate("/home")
     } catch (error) {
       setMessage(error.response.data.message || "Login failed.");
     }
@@ -24,7 +26,6 @@ const Login = () => {
 
   return (
     <div className="bg-white p-8 rounded-xl shadow-lg">
-      {/* <Navbar/> */}
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Login</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div>

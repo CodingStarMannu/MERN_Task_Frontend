@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { uploadProfilePicture } from "../api/api";
-import Navbar from "./Navbar";
 
 
 const ProfilePicture = () => {
@@ -31,7 +30,6 @@ const ProfilePicture = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Navbar />
       <div className="max-w-xl mx-auto py-12 px-4">
         <div className="bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-3xl font-bold text-gray-800 mb-6">
